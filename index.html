@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>M.A. Surya - Resume</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <style>
+    * {margin: 0; padding: 0; box-sizing: border-box;}
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #a9cdd9, #89b8c7);
+      color: #fff;
+      overflow-x: hidden;
+    }
+    .resume {
+      max-width: 1000px;
+      margin: 20px auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 15px;
+      background: #cce0e7;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+      animation: fadeIn 1.5s ease;
+    }
+    .header {
+      grid-column: span 3;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      background: #13738c;
+      padding: 15px;
+      border-radius: 10px;
+      animation: slideDown 1.5s ease;
+    }
+    .header img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover; /* ✅ keeps circle perfect */
+      animation: bounceIn 1.5s ease-out;
+    }
+
+    /* ✅ Simple Name + Subtitle Animation */
+    .header h1 {
+      font-size: 28px;
+      font-weight: 700;
+      color: #fff;
+      animation: nameFadeUp 1.5s ease forwards;
+    }
+    .header h2 {
+      font-size: 14px;
+      font-weight: 400;
+      margin-top: 5px;
+      opacity: 0;
+      animation: subtitleFade 1.5s ease forwards;
+      animation-delay: 0.8s; /* appears after the name */
+    }
+
+    @keyframes nameFadeUp {
+      0% {opacity: 0; transform: translateY(20px);}
+      100% {opacity: 1; transform: translateY(0);}
+    }
+    @keyframes subtitleFade {
+      0% {opacity: 0; transform: translateY(10px);}
+      100% {opacity: 1; transform: translateY(0);}
+    }
+
+    .box {
+      background: #13738c;
+      padding: 15px;
+      border-radius: 10px;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s ease-out;
+    }
+    .box.visible {opacity: 1; transform: translateY(0);}
+    .box h3 {
+      border-bottom: 2px solid #fff;
+      margin-bottom: 8px;
+      padding-bottom: 4px;
+      font-size: 16px;
+    }
+    ul {list-style: none;}
+    ul li {margin: 6px 0;}
+    
+    /* ✅ Software Skills */
+    .software-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    .software-grid div {
+      background: #fff;
+      color: #13738c;
+      padding: 8px;
+      border-radius: 6px;
+      font-weight: 500;
+      text-align: center;
+      transform: rotateY(90deg);
+      opacity: 0;
+      animation: flipIn 1s forwards;
+    }
+    .software-grid div:nth-child(1){animation-delay: 0.3s;}
+    .software-grid div:nth-child(2){animation-delay: 0.5s;}
+    .software-grid div:nth-child(3){animation-delay: 0.7s;}
+    .software-grid div:nth-child(4){animation-delay: 0.9s;}
+    .software-grid div:nth-child(5){animation-delay: 1.1s;}
+    .software-grid div:nth-child(6){animation-delay: 1.3s;}
+    .software-grid div:hover {
+      transform: translateY(-6px) scale(1.05);
+      background: linear-gradient(135deg, #f99224, #f76c6c);
+      color: #fff;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+      transition: all 0.4s ease;
+    }
+
+    /* ✅ Links */
+    .links {
+      grid-column: span 3;
+      text-align: center;
+      margin-top: 15px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .links a {
+      display: inline-block;
+      padding: 12px 25px;
+      background: linear-gradient(135deg, #13738c, #0e5c6f);
+      color: #fff;
+      font-weight: 600;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .links a::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: rgba(255,255,255,0.3);
+      transition: left 0.4s;
+    }
+    .links a:hover::after {
+      left: 100%;
+    }
+    .links a:hover {
+      transform: scale(1.1) rotate(-1deg);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+      background: linear-gradient(135deg, #f76c6c, #f99224);
+    }
+
+    /* ✅ Keyframes */
+    @keyframes fadeIn {from {opacity: 0;} to {opacity: 1;}}
+    @keyframes slideDown {from {transform: translateY(-50px); opacity: 0;} to {transform: translateY(0); opacity: 1;}}
+    @keyframes bounceIn {
+      0% {transform: scale(0.3); opacity: 0;}
+      50% {transform: scale(1.1); opacity: 1;}
+      70% {transform: scale(0.9);}
+      100% {transform: scale(1);}
+    }
+    @keyframes flipIn {
+      from {transform: rotateY(90deg); opacity: 0;}
+      to {transform: rotateY(0); opacity: 1;}
+    }
+
+    /* ✅ Responsive */
+    @media (max-width: 900px) {
+      .resume {grid-template-columns: 1fr 1fr;}
+      .header {grid-column: span 2;}
+      .links {grid-column: span 2;}
+    }
+    @media (max-width: 600px) {
+      .resume {grid-template-columns: 1fr;}
+      .header {
+        grid-column: span 1;
+        flex-direction: column;
+        text-align: center;
+      }
+      .header img {width: 100px; height: 100px;}
+      .links {grid-column: span 1; flex-direction: column; gap: 10px;}
+    }
+  </style>
+</head>
+<body>
+  <div class="resume">
+    <div class="header">
+      <img src="https://uploads.onecompiler.io/436mvhvur/43r5vjrfc/WhatsApp%20Image%202025-07-09%20at%203.22.22%20PM.png" alt="M.A. Surya">
+      <div>
+        <h1>M.A. SURYA</h1>
+        <h2>Game Designer | Graphic Designer</h2>
+      </div>
+    </div>
+
+    <!-- Contact -->
+    <div class="box">
+      <h3>Contact</h3>
+      <ul>
+        <li>📞 8148802817</li>
+        <li>✉️ surya.creative2810@gmail.com</li>
+        <li>📍 Meenabakkam, Chennai</li>
+      </ul>
+    </div>
+
+    <!-- Software -->
+    <div class="box">
+      <h3>Software</h3>
+      <div class="software-grid">
+        <div>Photoshop</div>
+        <div>Illustrator</div>
+        <div>Unity</div>
+        <div>VS Code</div>
+        <div>Premiere Pro</div>
+        <div>After Effects</div>
+      </div>
+    </div>
+
+    <!-- About -->
+    <div class="box">
+      <h3>About</h3>
+      <p>Creative Graphic Designer and Game Developer skilled in crafting visually engaging designs and interactive gameplay. Proficient in Photoshop, Illustrator, Unity, and C#, with strong problem-solving abilities and a passion for delivering innovative digital experiences.</p>
+    </div>
+
+    <!-- Skills -->
+    <div class="box">
+      <h3>Skills</h3>
+      <ul>
+        <li>✔ Leadership</li>
+        <li>✔ Teamwork & Collaboration</li>
+        <li>✔ Creativity & Innovation</li>
+        <li>✔ Adaptable and Quick Learner</li>
+        <li>✔ Decision Making</li>
+      </ul>
+    </div>
+
+    <!-- Hobbies -->
+    <div class="box">
+      <h3>Hobbies</h3>
+      <ul>
+        <li>🎮 Video Games</li>
+        <li>🎵 Music</li>
+        <li>✏️ Drawing</li>
+        <li>📸 Photography</li>
+      </ul>
+    </div>
+
+    <!-- Education -->
+    <div class="box">
+      <h3>Education</h3>
+      <ul>
+        <li>C.Tech in Game Technology at Image Creative Education</li>
+        <li>B.Sc Computer Science (2022-2025, Awaiting) - Tagore College of Arts & Science</li>
+      </ul>
+    </div>
+
+    <!-- Projects -->
+    <div class="box">
+      <h3>Projects</h3>
+      <p>✔ Completed 3 functional games as part of Game Design course.<br>
+         ✔ Built a personal brand (PRO FEET) showcasing design skills.</p>
+    </div>
+
+    <!-- Links -->
+    <div class="links">
+      <a href="https://www.behance.net/suryacreativ1" target="_blank">🎨 My Behance</a>
+      <a href="https://drive.google.com/" target="_blank">📂 See My Game Video</a>
+      <a href="https://drive.google.com/drive/folders/1XnYXAChvtJ9j5kH_kpYW0GUYEa0dz3Uh?usp=drive_link" target="_blank">📂 View PRO FEET Branding</a>
+    </div>
+  </div>
+
+  <script>
+    const boxes = document.querySelectorAll('.box');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, {threshold: 0.2});
+    boxes.forEach(box => observer.observe(box));
+  </script>
+</body>
+</html>
